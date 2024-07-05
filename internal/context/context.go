@@ -41,10 +41,21 @@ func InitNfContext() {
 		}
 	}
 	nfContext.SpyFamilyData = map[string]string{
-		"Loid": "Forger",
-		"Anya": "Forger",
-		"Yor":  "Forger",
-		"Bond": "Forger",
+		"Loid":   "Forger",
+		"Anya":   "Forger",
+		"Yor":    "Forger",
+		"Bond":   "Forger",
+		"Becky":  "Blackbell",
+		"Damian": "Desmond",
+		"Franky": "Franklin",
+		"Fiona":  "Frost",
+		"Sylvia": "Sherwood",
+		"Yuri":   "Briar",
+		"Millie": "Manis",
+		"Ewen":   "Egeburg",
+		"Emile":  "Elman",
+		"Henry":  "Henderson",
+		"Martha": "Marriott",
 	}
 }
 
