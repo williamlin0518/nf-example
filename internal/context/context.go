@@ -16,6 +16,8 @@ type NFContext struct {
 	UriScheme   models.UriScheme
 	BindingIPv4 string
 	SBIPort     int
+
+	SpyFamilyData map[string]string
 }
 
 var nfContext = NFContext{}
@@ -37,6 +39,12 @@ func InitNfContext() {
 			logger.CtxLog.Warn("Error parsing ServerIPv4 address as string. Using the 0.0.0.0 address as default.")
 			nfContext.BindingIPv4 = "0.0.0.0"
 		}
+	}
+	nfContext.SpyFamilyData = map[string]string{
+		"Loid": "Forger",
+		"Anya": "Forger",
+		"Yor":  "Forger",
+		"Bond": "Forger",
 	}
 }
 

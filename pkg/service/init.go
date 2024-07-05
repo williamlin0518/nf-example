@@ -10,6 +10,7 @@ import (
 	nf_context "github.com/andy89923/nf-example/internal/context"
 	"github.com/andy89923/nf-example/internal/logger"
 	"github.com/andy89923/nf-example/internal/sbi"
+	"github.com/andy89923/nf-example/internal/sbi/processor"
 	"github.com/andy89923/nf-example/pkg/app"
 	"github.com/andy89923/nf-example/pkg/factory"
 	"github.com/sirupsen/logrus"
@@ -24,6 +25,7 @@ type NfApp struct {
 	wg     sync.WaitGroup
 
 	sbiServer *sbi.Server
+	processor *processor.Processor
 }
 
 var _ app.App = &NfApp{}
@@ -46,6 +48,12 @@ func NewApp(ctx context.Context, cfg *factory.Config, tlsKeyLogPath string) (*Nf
 	sbiServer := sbi.NewServer(nf, tlsKeyLogPath)
 	nf.sbiServer = sbiServer
 
+	processor, err := processor.NewProcessor(nf)
+	if err != nil {
+		return nf, err
+	}
+	nf.processor = processor
+
 	return nf, nil
 }
 
@@ -55,6 +63,10 @@ func (a *NfApp) Config() *factory.Config {
 
 func (a *NfApp) Context() *nf_context.NFContext {
 	return a.nfCtx
+}
+
+func (a *NfApp) Processor() *processor.Processor {
+	return a.processor
 }
 
 func (a *NfApp) SetLogEnable(enable bool) {
