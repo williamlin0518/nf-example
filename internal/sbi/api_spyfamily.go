@@ -36,7 +36,7 @@ func (s *Server) HTTPSerchSpyFamilyCharacter(c *gin.Context) {
 
 	targetName := c.Param("Name")
 	if targetName == "" {
-		c.JSON(http.StatusBadRequest, "No name provided")
+		c.String(http.StatusBadRequest, "No name provided")
 		return
 	}
 
