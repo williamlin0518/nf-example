@@ -12,6 +12,8 @@ import (
 )
 
 func Test_HTTPSerchSpyFamilyCharacter(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
 	mockCtrl := gomock.NewController(t)
 	nfApp := sbi.NewMocknfApp(mockCtrl)
 	nfApp.EXPECT().Config().Return(&factory.Config{

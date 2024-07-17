@@ -11,6 +11,8 @@ import (
 )
 
 func Test_FindSpyFamilyCharacterName(t *testing.T) {
+	gin.SetMode(gin.TestMode)
+
 	mockCtrl := gomock.NewController(t)
 	processorNf := processor.NewMockProcessorNf(mockCtrl)
 	processor, err := processor.NewProcessor(processorNf)
