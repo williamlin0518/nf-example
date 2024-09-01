@@ -7,7 +7,7 @@ Try adding more services and learn how to collaborate using GitHub.
 
 ```sh
 make
-./bin/nf -c config/nf.cfg
+./bin/nf -c config/nfcfg.yaml
 ```
 
 ## Try Service
