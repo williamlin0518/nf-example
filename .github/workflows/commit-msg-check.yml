@@ -2,7 +2,7 @@ name: 'Commit Message Check'
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ ]
 
 jobs:
   build:
