@@ -57,6 +57,9 @@ func newRouter(s *Server) *gin.Engine {
 	kuroumiGroup := router.Group("/kuromi")
 	applyRoutes(kuroumiGroup, s.getKuromiRoute())
 
+	ChiikawaGroup := router.Group("/chiikawa")
+	applyRoutes(ChiikawaGroup, s.getChiikawaRoute())
+
 	return router
 }
 
