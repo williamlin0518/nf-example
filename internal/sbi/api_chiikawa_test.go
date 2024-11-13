@@ -3,7 +3,6 @@ package sbi_test
 import (
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 
 	"github.com/andy89923/nf-example/internal/sbi"
@@ -51,48 +50,38 @@ func Test_getChiikawaRoute(t *testing.T) {
 		}
 	})
 
-	t.Run("Create Character", func(t *testing.T) {
+	t.Run("Print Chiikawa", func(t *testing.T) {
 		const EXPECTED_STATUS = http.StatusOK
-		const CHARACTER_NAME = "Usagi"
-		const EXPECTED_BODY = "Hello " + CHARACTER_NAME + "!"
+		const EXPECTED_BODY = "..............*,.............&.., /*...&... /*..................................\n" +
+		"...............%.............&,.. .&..,%..  &...................,...............\n" +
+		"................*.............%,.. @..(,.. %...................* ...............\n" +
+		"................*.............,%.. .@.(/.. && ............ .%&&.................\n" +
+		"...............//////*,. ..,#.,%@.. .#(*.  (&&&&/ . ....%,......../,............\n" +
+		"......... .%  .  ..     %&,                        *&,     ... .... ..( ...# ...\n" +
+		"/.. .. ,( ...      ..&.     @                  &       &              ... # ....\n" +
+		" ..%%,             &      .(                     &       &.              *,(..  \n" +
+		"     #           ,#       (   #@%        *&&%     .       #(           (. ....( \n" +
+		"     ./          %           &&&&%       &&&&(             &         #.         \n" +
+		"       #        @.      .*...         *     .*.//.,        (/      %            \n" +
+		"        %       @.     ./,#..,.    %%&&&,   ,.*,.,..       /*    ,*             \n" +
+		"         ,       %                   %*/                   &    .*.             \n" +
+		"         .*.     .%                  ,/.                  %.       %            \n" +
+		"           .,      %*                   ,%&#/*/%(        &  ,. ,*/((##,##%%%%#(/\n" +
+		"%%%%%&&&%(/*,.     .*,&&             &,    ,&@(.   #&*%@        .               \n" +
+		"..   ...               .@               %&(*/#&&%/  . &                         \n" +
+		"                        &                             #,                   ..   "
 
 		httpRecorder := httptest.NewRecorder()
 		ginCtx, _ := gin.CreateTestContext(httpRecorder)
 
 		var err error
-		jsonBody := `{"name":"` + CHARACTER_NAME + `"}`
-		ginCtx.Request, err = http.NewRequest("POST", "/chiikawa/character", strings.NewReader(jsonBody))
+		ginCtx.Request, err = http.NewRequest("POST", "/chiikawa/print", nil)
 		if err != nil {
 			t.Errorf("Failed to create request: %s", err)
 			return
 		}
 
-		server.CreateChiikawaCharacter(ginCtx)
-
-		if httpRecorder.Code != EXPECTED_STATUS {
-			t.Errorf("Expected status code %d, got %d", EXPECTED_STATUS, httpRecorder.Code)
-		}
-
-		if httpRecorder.Body.String() != EXPECTED_BODY {
-			t.Errorf("Expected body %s, got %s", EXPECTED_BODY, httpRecorder.Body.String())
-		}
-	})
-
-	t.Run("List Character", func(t *testing.T) {
-		const EXPECTED_STATUS = http.StatusOK
-		const EXPECTED_BODY = "Chiikawa Character List : Usagi"
-
-		httpRecorder := httptest.NewRecorder()
-		ginCtx, _ := gin.CreateTestContext(httpRecorder)
-
-		var err error
-		ginCtx.Request, err = http.NewRequest("GET", "/chiikawa/list", nil)
-		if err != nil {
-			t.Errorf("Failed to create request: %s", err)
-			return
-		}
-
-		server.ListChiikawaCharacter(ginCtx)
+		server.PrintChiikawa(ginCtx)
 
 		if httpRecorder.Code != EXPECTED_STATUS {
 			t.Errorf("Expected status code %d, got %d", EXPECTED_STATUS, httpRecorder.Code)
