@@ -1,5 +1,6 @@
 package sbi
 
+//nolint:dupl
 import (
 	"net/http"
 	"net/http/httptest"
@@ -13,7 +14,7 @@ func TestGetHello(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
-	
+
 	server := &Server{}
 	server.GetHello(c)
 
@@ -25,9 +26,9 @@ func TestPostHello(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
-	
+
 	c.Params = []gin.Param{{Key: "message", Value: "test"}}
-	
+
 	server := &Server{}
 	server.PostHello(c)
 
